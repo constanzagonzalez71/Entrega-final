@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "Lana 200 grs",
+    "description": "Merino de alta calidad",
+    "code": "Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg",
+    "price": 3500,
+    "status": "true",
+    "stock": 100,
+    "category": "Lanas",
+    "thumbnails": "https://example.com/lana200grs1.jpg"
+  },
+
+  {
+    "id": 2,
+    "title": "Lana 100 grs",
+    "description": "Mohair suave",
+    "code": "Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdclanas100grs",
+    "price": 2000,
+    "status": "true",
+    "stock": 100,
+    "category": "Lanas",
+    "thumbnails": "https://example.com/lana100grs1.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Agujas de tejer",
+    "description": "Agujas de acero inoxidable",
+    "code": "Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEgAgujas",
+    "price": 1500,
+    "status": "true",
+    "stock": 50,
+    "category": "Agujas",
+    "thumbnails": "https://example.com/agujas.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Ganchillo 3.5 mm",
+    "description": "Ganchillo de aluminio",
+    "code": "Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEgGanchillo",
+    "price": 1200,
+    "status": "true",
+    "stock": 50,
+    "category": "Agujas",
+    "thumbnails": "https://example.com/ganchillo35mm.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Patrón de tejido",
+    "description": "Patrón para bufanda",
+    "code": "Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEgPatronBufanda",
+    "price": 8000,
+    "status": "true",
+    "stock": 200,
+    "category": "Patrones",
+    "thumbnails": "https://example.com/patronbufanda.jpg"
+  }
+]
