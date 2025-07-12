@@ -3,7 +3,7 @@ import path from "path";
 
 const cartsPath = path.resolve("./src/carts.json");
 
-export class CartManager {
+export default class CartManager {
   constructor() {
     this.path = cartsPath;
   }

@@ -1,3 +1,5 @@
+import fs from "fs";
+
 class ProductManager {
   constructor(pathFile) {
     this.pathFile = pathFile;
@@ -10,6 +12,7 @@ class ProductManager {
       const products = JSON.parse(fileData);
       return products;
     } catch (error) {
+      console.error("Error al leer el archivo de productos:", error);
       throw new Error("Error al traer los productos - ", error.message);
     }
   }

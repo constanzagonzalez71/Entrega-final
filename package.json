@@ -20,5 +20,13 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/constanzagonzalez71/preentrega2backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/constanzagonzalez71/preentrega2backend/issues"
+  },
+  "homepage": "https://github.com/constanzagonzalez71/preentrega2backend#readme",
   "description": ""
 }

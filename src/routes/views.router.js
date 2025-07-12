@@ -10,6 +10,7 @@ viewsRouter.get('/', async(req, res) => {
         res.render('home', { products });
     }
         catch (error) {
+          console.error('Error al obtener los productos:', error);
         
         res.status(500).send({ message: error.message });
     }

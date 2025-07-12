@@ -1,16 +1,16 @@
 import express from "express";
 import productsRouter from "./routes/products.router.js";
-import cartRouter from "./routes/cart.routers.js";
+import cartRouter from "./routes/cart.router.js";
 import { engine } from "express-handlebars";  
-import{server} from "socket.io";
+import { Server } from "socket.io";
 import viewsRouter from "./routes/views.router.js";
 import ProductManager from "./ProductManager.js";
 import http from "http";
 
 
 const app = express();
-const server =http.createServer(app);
-const io = new server(server);
+const server = http.createServer(app);
+const io = new Server(server); 
 
 
 // Configuración del motor de plantillas Handlebars
