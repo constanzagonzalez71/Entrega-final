@@ -1,26 +1,49 @@
-<div>
-    <h1>Real Time Products</h1>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">🛒 Real Time Products</h1>
 
-    <form id="formNewProduct">
-        <input type="text"  name="title" placeholder="Ingrese título " required>
-        <input type="number" name="price" placeholder="Ingrese precio " required>
-        <input type="text"  name="description" placeholder="Ingrese descripción del producto" required>
-        <input type="number"  name="stock" placeholder="Ingrese el stock" required>
-        <input type="text"  name="code" placeholder="Ingrese el código" required>
-        <input type="text" name="category" placeholder="Ingrese la categoría" required>
-        <button type="submit">Enviar</button>
-    </form>
-    <h2>Lista de productos</h2>
-    <ul id="productList">
+  <!-- Formulario de producto -->
+  <form id="formNewProduct" class="row g-3 mb-5">
+    <div class="col-md-6">
+      <input type="text" name="title" class="form-control" placeholder="Ingrese título" required>
+    </div>
+    <div class="col-md-6">
+      <input type="number" name="price" class="form-control" placeholder="Ingrese precio" required>
+    </div>
+    <div class="col-12">
+      <input type="text" name="description" class="form-control" placeholder="Ingrese descripción del producto" required>
+    </div>
+    <div class="col-md-4">
+      <input type="number" name="stock" class="form-control" placeholder="Ingrese el stock" required>
+    </div>
+    <div class="col-md-4">
+      <input type="text" name="code" class="form-control" placeholder="Ingrese el código" required>
+    </div>
+    <div class="col-md-4">
+      <input type="text" name="category" class="form-control" placeholder="Ingrese la categoría" required>
+    </div>
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-success">➕ Enviar</button>
+    </div>
+  </form>
+
+  <!-- Lista de productos -->
+  <h2 class="mb-3">📦 Lista de productos</h2>
+  <ul id="productList" class="list-group">
     {{#each products}}
-        <li>
-            <h2>{{this.title}}</h2>
-            
-            <p>Precio: {{this.price}} - Descripción: {{this.description}} - Stock: {{this.stock}} - Código: {{this.code}} - Categoría: {{this.category}}</p>
-       </li>
+      <li class="list-group-item">
+        <h5>{{this.title}}</h5>
+        <p>
+          <strong>💲Precio:</strong> {{this.price}} <br>
+          <strong>📝 Descripción:</strong> {{this.description}} <br>
+          <strong>📦 Stock:</strong> {{this.stock}} <br>
+          <strong>🧾 Código:</strong> {{this.code}} <br>
+          <strong>📂 Categoría:</strong> {{this.category}}
+        </p>
+      </li>
     {{/each}}
-        
-</ul>
+  </ul>
 </div>
-<script src= "/socket.io/socket.io.js"></script>
-<script src= "/js/index.js"></script>
+
+<!-- Scripts -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

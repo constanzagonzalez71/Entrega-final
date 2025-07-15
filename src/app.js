@@ -42,10 +42,11 @@ io.on("connection", (socket)=> {
   socket.on("newProduct", async(productData) => {
      
     try {
+      // Agregamos el nuevo producto usando el ProductManager
      const newProduct = await productManager.addProduct(productData);
-     const updateProducts = await productManager.getProducts();
+     
       
-      io.emit("productsUpdated", updateProducts);
+      io.emit("updatedProducts", newProduct);
     } catch (error) {
       console.error("Error al agregar el producto:");      
       

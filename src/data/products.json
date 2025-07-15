@@ -56,29 +56,83 @@
   },
   {
     "id": 6,
-    "title": "lana ",
-    "price": 300,
-    "description": "lana mohair",
-    "stock": 1,
-    "code": "12",
-    "category": "lana"
+    "title": "55",
+    "price": "55",
+    "description": "55",
+    "stock": "55",
+    "code": "55",
+    "category": "55"
   },
   {
     "id": 7,
-    "title": "ovillo ",
-    "price": "3500",
-    "description": "lana mohair",
-    "stock": "23",
-    "code": "12",
-    "category": "lana"
+    "title": "66",
+    "price": "66",
+    "description": "66",
+    "stock": "66",
+    "code": "66",
+    "category": "66"
   },
   {
     "id": 8,
+    "title": "99",
+    "price": "99",
+    "description": "99",
+    "stock": "99",
+    "code": "88",
+    "category": "88"
+  },
+  {
+    "id": 9,
+    "title": "99",
+    "price": "99",
+    "description": "99",
+    "stock": "99",
+    "code": "99",
+    "category": "99"
+  },
+  {
+    "id": 10,
+    "title": "88",
+    "price": "88",
+    "description": "88",
+    "stock": "88",
+    "code": "88",
+    "category": "88"
+  },
+  {
+    "id": 11,
+    "title": "77",
+    "price": "77",
+    "description": "77",
+    "stock": "77",
+    "code": "77",
+    "category": "77"
+  },
+  {
+    "id": 12,
     "title": "madeja",
-    "price": "3000",
-    "description": "lana mohair",
-    "stock": "23",
-    "code": "12",
+    "price": "2000",
+    "description": "madeja color rosa",
+    "stock": "34",
+    "code": "78",
     "category": "lana"
+  },
+  {
+    "id": 13,
+    "title": "madeja",
+    "price": "4500",
+    "description": "mohair",
+    "stock": "24",
+    "code": "ret",
+    "category": "lanas"
+  },
+  {
+    "id": 14,
+    "title": "99",
+    "price": "00",
+    "description": "00",
+    "stock": "00",
+    "code": "00",
+    "category": "00"
   }
 ]
