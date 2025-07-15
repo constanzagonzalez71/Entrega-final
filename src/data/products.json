@@ -10,7 +10,6 @@
     "category": "Lanas",
     "thumbnails": "https://example.com/lana200grs1.jpg"
   },
-
   {
     "id": 2,
     "title": "Lana 100 grs",
@@ -54,5 +53,32 @@
     "stock": 200,
     "category": "Patrones",
     "thumbnails": "https://example.com/patronbufanda.jpg"
+  },
+  {
+    "id": 6,
+    "title": "lana ",
+    "price": 300,
+    "description": "lana mohair",
+    "stock": 1,
+    "code": "12",
+    "category": "lana"
+  },
+  {
+    "id": 7,
+    "title": "ovillo ",
+    "price": "3500",
+    "description": "lana mohair",
+    "stock": "23",
+    "code": "12",
+    "category": "lana"
+  },
+  {
+    "id": 8,
+    "title": "madeja",
+    "price": "3000",
+    "description": "lana mohair",
+    "stock": "23",
+    "code": "12",
+    "category": "lana"
   }
 ]

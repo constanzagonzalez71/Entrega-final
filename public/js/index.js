@@ -11,16 +11,19 @@ formNewproduct.addEventListener("submit", (event) => {
     formData.forEach((value, key) => {
     productData[key] = value;
 });
+
 socket.emit("newProduct", productData);
-})
-socket.on("productAdded", (newProduct) => {
+formNewproduct.reset();
+});
+// Escuchamos el evento "productsUpdated" para actualizar la lista de productos
+socket.on("productsUpdate", (newProduct) => {
     const productList = document.getElementById("productList");
-    productList.innerHTML += `
-    <li>
+    productList.innerHTML +=  `
+   <li>
         <h2>${newProduct.title}</h2>
         <p>Precio: ${newProduct.price}</p>
-        <p>Descripción: ${newProduct.description}</p>
-        <p>Código: ${newProduct.code}</p>
+        <p>Descripción: ${newProduct.description}<p>
+        <p>Código: ${newProduct.code}<p>
         <p>Stock: ${newProduct.stock}</p>
-    </li>`;
+    </li>`
 });

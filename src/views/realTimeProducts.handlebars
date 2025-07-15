@@ -15,12 +15,12 @@
     {{#each products}}
         <li>
             <h2>{{this.title}}</h2>
-            <h3>Precio: {{this.price}}</h3>
-            <li>Descripción: {{this.description}} - Stock: {{this.stock}}  - Código: {{this.code}} - Categoría: {{this.category}}
+            
+            <p>Precio: {{this.price}} - Descripción: {{this.description}} - Stock: {{this.stock}} - Código: {{this.code}} - Categoría: {{this.category}}</p>
        </li>
     {{/each}}
         
-       </ul>
+</ul>
 </div>
-<script> src= "/socket.io.js/socket.io.js"</script>
-<script> src"/js/index.js"</script>
+<script src= "/socket.io/socket.io.js"></script>
+<script src= "/js/index.js"></script>

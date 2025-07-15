@@ -8,6 +8,7 @@ import ProductManager from "./ProductManager.js";
 import http from "http";
 
 
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server); 
@@ -42,8 +43,9 @@ io.on("connection", (socket)=> {
      
     try {
      const newProduct = await productManager.addProduct(productData);
+     const updateProducts = await productManager.getProducts();
       
-      io.emit("productAdded", newProduct);
+      io.emit("productsUpdated", updateProducts);
     } catch (error) {
       console.error("Error al agregar el producto:");      
       
