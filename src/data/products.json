@@ -134,5 +134,50 @@
     "stock": "00",
     "code": "00",
     "category": "00"
+  },
+  {
+    "id": 15,
+    "title": "77",
+    "price": "77",
+    "description": "77",
+    "stock": "77",
+    "code": "77",
+    "category": "77"
+  },
+  {
+    "id": 16,
+    "title": "lanaa",
+    "price": "99",
+    "description": "lana",
+    "stock": "99",
+    "code": "99",
+    "category": "99"
+  },
+  {
+    "id": 17,
+    "title": "lana",
+    "price": 999,
+    "description": "lana",
+    "stock": 78,
+    "code": "12",
+    "category": "lana"
+  },
+  {
+    "id": 18,
+    "title": "mohair",
+    "price": 888,
+    "description": "azul",
+    "stock": 99,
+    "code": "00",
+    "category": "lana"
+  },
+  {
+    "id": 19,
+    "title": "agujas",
+    "price": 500,
+    "description": "acero",
+    "stock": 7,
+    "code": "00",
+    "category": "crochet"
   }
 ]

@@ -1,28 +1,43 @@
-
 const socket = io();
-const formNewproduct = document.getElementById("formNewProduct");
-formNewproduct.addEventListener("submit", (event) => {
-  event.preventDefault();
-  // Obtenemos los datos del formulario
-  // y los enviamos al servidor a través del socket
-  const formData = new FormData(formNewproduct);
-  const productData = {};
-  formData.forEach((value, key) => {
-    productData[key] = value;
-  });
 
-  socket.emit("newProduct", productData);
-  formNewproduct.reset();
+// Manejo del envío de formulario
+document.getElementById("formNewProduct").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const product = Object.fromEntries(formData.entries());
+
+  product.price = parseFloat(product.price);
+  product.stock = parseInt(product.stock);
+
+  // Emitir producto nuevo al servidor
+  socket.emit("newProduct", product);
+
+  e.target.reset();
+
+  // Mostrar notificación Bootstrap
+  const toastElement = document.getElementById("alertBox");
+  const toast = new bootstrap.Toast(toastElement);
+  toast.show();
 });
-// Escuchamos el evento "productsUpdated" para actualizar la lista de productos
-socket.on("updatedProducts", (newProduct) => {
-  const productList = document.getElementById("productList");
-  productList.innerHTML += `
-   <li>
-        <h2>${newProduct.title}</h2>
-        <p>Precio: ${newProduct.price}</p>
-        <p>Descripción: ${newProduct.description}<p>
-        <p>Código: ${newProduct.code}<p>
-        <p>Stock: ${newProduct.stock}</p>
-    </li>`;
+
+// Actualizar la lista cuando se emite el evento
+socket.on("updatedProducts", (products) => {
+  const list = document.getElementById("productList");
+  list.innerHTML = "";
+
+  products.forEach((product) => {
+    const li = document.createElement("li");
+    li.className = "list-group-item";
+    li.innerHTML = `
+      <h5>${product.title}</h5>
+      <p>
+        <strong>💲Precio:</strong> ${product.price} <br>
+        <strong>📝 Descripción:</strong> ${product.description} <br>
+        <strong>📦 Stock:</strong> ${product.stock} <br>
+        <strong>🧾 Código:</strong> ${product.code} <br>
+        <strong>📂 Categoría:</strong> ${product.category}
+      </p>
+    `;
+    list.appendChild(li);
+  });
 });
