@@ -1,101 +1,40 @@
-import fs from "fs";
+import ProductModel from "../models/Product.model.js";
 
-class ProductManager {
-  constructor(pathFile) {
-    this.pathFile = pathFile;
-  }
-
+export default class ProductManager {
   async getProducts() {
-    try {
-      //recuperar la data
-      const fileData = await fs.promises.readFile(this.pathFile, "utf-8");
-      const products = JSON.parse(fileData);
-      return products;
-    } catch (error) {
-      console.error("Error al leer el archivo de productos:", error);
-      throw new Error("Error al traer los productos - ", error.message);
-    }
+    return await ProductModel.find().lean();
   }
 
-  generateNewId(products) {
-    if (products.length > 0) {
-      return products[products.length - 1].id + 1;
-    } else {
-      return 1;
-    }
+  async getProductById(productId) {
+    return await ProductModel.findById(productId).lean();
   }
 
   async addProduct(newProduct) {
     try {
-      //recuperar la data
-      const fileData = await fs.promises.readFile(this.pathFile, "utf-8");
-      const products = JSON.parse(fileData);
+      const exists = await ProductModel.findOne({ code: newProduct.code });
+      if (exists) throw new Error("El código ya existe");
 
-      const newId = this.generateNewId(products);
-      //editamos la data
-      const product = { id: newId, ...newProduct };
-      products.push(product);
-
-      //guardar en el archivo
-      await fs.promises.writeFile(
-        this.pathFile,
-        JSON.stringify(products, null, 2),
-        "utf-8"
-      );
-      return products;
+      const product = await ProductModel.create(newProduct);
+      return product;
     } catch (error) {
-      throw new Error("Error al añadir el producto - ", error.message);
+      throw new Error("Error al agregar producto: " + error.message);
     }
   }
 
-  async deleteProductById(idProduct) {
-    try {
-      const fileData = await fs.promises.readFile(this.pathFile, "utf-8");
-      const data = JSON.parse(fileData);
-      const productIndex = data.findIndex(
-        (prod) => prod.id === parseInt(idProduct)
-      );
-
-      if (productIndex === -1)
-        throw new Error(`Producto con id: ${idProduct} no encontrado`);
-      data.splice(productIndex, 1);
-
-      await fs.promises.writeFile(
-        this.pathFile,
-        JSON.stringify(data, null, 2),
-        "utf-8"
-      );
-
-      return data;
-    } catch (error) {
-      throw new Error(`Error al eliminar el producto: ${error.message}`);
-    }
+  async deleteProductById(productId) {
+    const result = await ProductModel.deleteOne({ _id: productId });
+    if (result.deletedCount === 0)
+      throw new Error("Producto no encontrado para eliminar");
+    return true;
   }
 
-  async updateProductById(idProduct, updatedProduct) {
-    try {
-      const fileData = await fs.promises.readFile(this.pathFile, "utf-8");
-      const data = JSON.parse(fileData);
-      const productIndex = data.findIndex(
-        (prod) => prod.id === parseInt(idProduct)
-      );
-      if (productIndex === -1)
-        throw new Error(`Producto con id: ${idProduct} no encontrado`);
-
-      data[productIndex] = { ...data[productIndex], ...updatedProduct };
-      await fs.promises.writeFile(
-        this.pathFile,
-        JSON.stringify(data, null, 2),
-        "utf-8"
-      );
-
-      return data;
-    } catch (error) {
-      throw new Error(`Error al actualizar el producto: ${error.message}`);
-    }
+  async updateProduct(productId, updateFields) {
+    const updated = await ProductModel.findByIdAndUpdate(
+      productId,
+      updateFields,
+      { new: true }
+    );
+    if (!updated) throw new Error("Producto no encontrado para actualizar");
+    return updated;
   }
-
-  //getProductById
 }
-
-export default ProductManager;

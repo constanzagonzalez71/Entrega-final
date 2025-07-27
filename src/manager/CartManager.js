@@ -28,23 +28,67 @@ export default class CartManager {
     return newCart;
   }
 
-  async getCartById(id) {
+  async getCartById(cid) {
     const carts = await this.getCarts();
-    return carts.find((c) => c.id === id);
+    return carts.find((cart) => cart.id === cid);
   }
 
-  async addProductToCart(cartId, productId) {
+  async addProductToCart(cid, pid) {
     const carts = await this.getCarts();
-    const cart = carts.find((c) => c.id === cartId);
+    const cart = carts.find((cart) => cart.id === cid);
     if (!cart) return null;
 
-    const product = cart.products.find((p) => p.product === productId);
-    if (product) {
-      product.quantity++;
+    const existing = cart.products.find((p) => p.product === pid);
+    if (existing) {
+      existing.quantity += 1;
     } else {
-      cart.products.push({ product: productId, quantity: 1 });
+      cart.products.push({ product: pid, quantity: 1 });
     }
 
+    await this.saveCarts(carts);
+    return cart;
+  }
+
+  async removeProductFromCart(cid, pid) {
+    const carts = await this.getCarts();
+    const cart = carts.find((cart) => cart.id === cid);
+    if (!cart) return null;
+
+    cart.products = cart.products.filter((p) => p.product !== pid);
+    await this.saveCarts(carts);
+    return cart;
+  }
+
+  async updateProductQuantity(cid, pid, quantity) {
+    const carts = await this.getCarts();
+    const cart = carts.find((cart) => cart.id === cid);
+    if (!cart) return null;
+
+    const productInCart = cart.products.find((p) => p.product === pid);
+    if (productInCart) {
+      productInCart.quantity = quantity;
+    }
+
+    await this.saveCarts(carts);
+    return cart;
+  }
+
+  async replaceCartProducts(cid, newProducts) {
+    const carts = await this.getCarts();
+    const cart = carts.find((cart) => cart.id === cid);
+    if (!cart) return null;
+
+    cart.products = newProducts;
+    await this.saveCarts(carts);
+    return cart;
+  }
+
+  async clearCart(cid) {
+    const carts = await this.getCarts();
+    const cart = carts.find((cart) => cart.id === cid);
+    if (!cart) return null;
+
+    cart.products = [];
     await this.saveCarts(carts);
     return cart;
   }

@@ -1,0 +1,32 @@
+<div class="container my-5">
+  <h1 class="text-center mb-5">🛍️ Catálogo de Productos</h1>
+
+  {{#if products.length}}
+    <div class="row justify-content-center">
+      {{#each products}}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm border-top border-info smoothAppear">
+            <div class="card-body">
+              <h5 class="card-title text-primary">{{this.title}}</h5>
+              <p class="card-text">
+                <i class="bi bi-currency-dollar"></i> {{this.price}}<br>
+                <i class="bi bi-box"></i> Stock: {{this.stock}}<br>
+                <i class="bi bi-tags"></i> Categoría: {{this.category}}<br>
+                <strong>Descripción:</strong> {{this.description}}
+              </p>
+            </div>
+            <div class="card-footer text-end bg-white">
+              <button class="btn btn-outline-primary btn-sm add-to-cart" data-id="{{this.id}}">
+                <i class="bi bi-cart-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="alert alert-warning text-center">
+      ⚠️ No hay productos disponibles en este momento.
+    </div>
+  {{/if}}
+</div>

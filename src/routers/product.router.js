@@ -1,4 +1,5 @@
 import { Router } from "express";
+import mongoose from "mongoose";
 import { body, validationResult } from "express-validator";
 import {
   getAllProducts,
@@ -9,7 +10,15 @@ import {
 
 const router = Router();
 
-// 👉 Validación completa para POST
+// 🛡️ Validación de ObjectId
+const validateObjectId = (paramName) => (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params[paramName])) {
+    return res.status(400).json({ error: `ID de ${paramName} inválido` });
+  }
+  next();
+};
+
+// Validación común POST
 const validateProduct = [
   body("title").trim().notEmpty().withMessage("El título es obligatorio"),
   body("price")
@@ -20,9 +29,18 @@ const validateProduct = [
     .withMessage("El stock debe ser entero positivo"),
   body("code").trim().notEmpty().withMessage("El código es obligatorio"),
   body("category").trim().notEmpty().withMessage("La categoría es obligatoria"),
+  body("status")
+    .optional()
+    .isIn(["visible", "oculto", "agotado"])
+    .withMessage("Estado inválido"),
+  body("thumbnails")
+    .optional()
+    .isArray()
+    .withMessage("Thumbnails debe ser un array"),
+  body("tags").optional().isArray().withMessage("Tags debe ser un array"),
 ];
 
-// 👉 Validación opcional para PUT
+// Validación opcional PUT
 const optionalValidation = [
   body("title")
     .optional()
@@ -41,32 +59,48 @@ const optionalValidation = [
     .trim()
     .notEmpty()
     .withMessage("La categoría no puede estar vacía"),
+  body("status")
+    .optional()
+    .isIn(["visible", "oculto", "agotado"])
+    .withMessage("Estado inválido"),
+  body("thumbnails")
+    .optional()
+    .isArray()
+    .withMessage("Thumbnails debe ser un array"),
+  body("tags").optional().isArray().withMessage("Tags debe ser un array"),
 ];
 
-// ✅ Manejo común de errores de validación
+// 🔍 Manejo de errores de validación
 const handleValidationError = (req, res) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty())
-    return res.status(400).json({ errors: errors.array() });
-  return null;
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+    return true;
+  }
+  return false;
 };
 
-// 📦 Obtener todos los productos
+//  Obtener todos los productos
 router.get("/", getAllProducts);
 
-// 🆕 Crear nuevo producto
+//  Crear nuevo producto
 router.post("/", validateProduct, async (req, res) => {
   if (handleValidationError(req, res)) return;
   await createProduct(req, res);
 });
 
-// ✏️ Actualizar producto por ID
-router.put("/:pid", optionalValidation, async (req, res) => {
-  if (handleValidationError(req, res)) return;
-  await updateProduct(req, res);
-});
+//  Actualizar producto por ID
+router.put(
+  "/:pid",
+  validateObjectId("pid"),
+  optionalValidation,
+  async (req, res) => {
+    if (handleValidationError(req, res)) return;
+    await updateProduct(req, res);
+  }
+);
 
-// ❌ Eliminar producto por ID
-router.delete("/:pid", deleteProduct);
+//  Eliminar producto por ID
+router.delete("/:pid", validateObjectId("pid"), deleteProduct);
 
 export default router;

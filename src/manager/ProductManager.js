@@ -1,4 +1,3 @@
-// src/managers/ProductManager.js
 // ⚠️ Este ProductManager usa persistencia local (JSON) y quedó como referencia técnica.
 // Ya fue reemplazado por MongoDB + Mongoose en la entrega final.
 import fs from "fs";
@@ -15,6 +14,7 @@ class ProductManager {
     this.pathFile = dataPath;
   }
 
+  // 🔍 Obtener todos los productos
   async getProducts() {
     try {
       const fileData = await fs.promises.readFile(this.pathFile, "utf-8");
@@ -26,16 +26,23 @@ class ProductManager {
     }
   }
 
+  // 🆔 Generar nuevo _id secuencial
   generateNewId(products) {
-    return products.length > 0 ? products[products.length - 1].id + 1 : 1;
+    return products.length > 0 ? products[products.length - 1]._id + 1 : 1;
   }
 
+  // ➕ Agregar un nuevo producto
   async addProduct(newProduct) {
     try {
       const products = await this.getProducts();
-      const newId = this.generateNewId(products);
 
-      const product = { id: newId, ...newProduct };
+      // Verificar que no se repita el código
+      const exists = products.find((p) => p.code === newProduct.code);
+      if (exists) throw new Error("Ya existe un producto con ese código");
+
+      const newId = this.generateNewId(products);
+      const product = { _id: newId, ...newProduct };
+
       products.push(product);
 
       await fs.promises.writeFile(
@@ -49,15 +56,16 @@ class ProductManager {
     }
   }
 
+  // 🗑️ Eliminar un producto por _id
   async deleteProductById(idProduct) {
     try {
       const products = await this.getProducts();
       const index = products.findIndex(
-        (prod) => prod.id === parseInt(idProduct)
+        (prod) => prod._id === parseInt(idProduct)
       );
 
       if (index === -1)
-        throw new Error(`Producto con id: ${idProduct} no encontrado`);
+        throw new Error(`Producto con _id: ${idProduct} no encontrado`);
 
       products.splice(index, 1);
 
@@ -72,15 +80,16 @@ class ProductManager {
     }
   }
 
+  // 📝 Actualizar un producto por _id
   async updateProductById(idProduct, updatedProduct) {
     try {
       const products = await this.getProducts();
       const index = products.findIndex(
-        (prod) => prod.id === parseInt(idProduct)
+        (prod) => prod._id === parseInt(idProduct)
       );
 
       if (index === -1)
-        throw new Error(`Producto con id: ${idProduct} no encontrado`);
+        throw new Error(`Producto con _id: ${idProduct} no encontrado`);
 
       products[index] = { ...products[index], ...updatedProduct };
 

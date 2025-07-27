@@ -1,19 +1,19 @@
 [
   {
-    "id": 1,
+    "_id": { "$oid": "64e2f1ae8f38b1e621ab0001" },
     "products": [
       {
-        "product": 2,
+        "product": { "$oid": "64e2f152dfb40be9e21a0002" },
         "quantity": 3
       },
       {
-        "product": 4,
+        "product": { "$oid": "64e2f153dfb40be9e21a0004" },
         "quantity": 1
       }
     ]
   },
   {
-    "id": 2,
+    "_id": { "$oid": "64e2f1ae8f38b1e621ab0002" },
     "products": []
   }
 ]
