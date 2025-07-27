@@ -1,0 +1,111 @@
+/* 🎨 Paleta personalizada */
+:root {
+  --primary-color: #0d6efd;
+  --accent-color: #00bfa6;
+  --bg-light: #f8f9fa;
+  --text-dark: #212529;
+  --card-border: #dee2e6;
+}
+
+/* 🧵 Estilo general */
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 🧠 Títulos con impacto */
+h1, h2, h3 {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* 🧩 Cards de productos */
+.card {
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* 📦 Etiquetas dentro del card */
+.card p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ✅ Animación entrada */
+.fadeIn {
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🚨 Alerta dinámica */
+.alert {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* 🚀 Botones especiales */
+.btn-accent {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+}
+
+.btn-accent:hover {
+  background-color: #00a58f;
+}
+
+/* 🧠 Navbar pulido */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,0.85);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #fff;
+}
+
+/* 📱 Responsive padding */
+.container {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.smoothAppear {
+  animation: smoothAppear 0.5s ease-out;
+}
+
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

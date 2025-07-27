@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container mt-4">
   <h1 class="text-center mb-4">🛍 Home Page</h1>
   <h2 class="mb-3">Lista de productos</h2>
@@ -23,4 +24,25 @@
   </div>
 
   
+=======
+<div class="container my-5">
+  <h2 class="text-center mb-4">🛍️ Catálogo de Productos</h2>
+
+  {{#if products.length}}
+    <div class="row justify-content-center">
+      {{#each products}}
+        <div class="card col-md-3 m-2 shadow-sm p-3 border-top border-info smoothAppear">
+          <h5>{{this.title}}</h5>
+          <p><i class="bi bi-currency-dollar"></i> {{this.price}}</p>
+          <p><i class="bi bi-box"></i> Stock: {{this.stock}}</p>
+          <p><i class="bi bi-tags"></i> Categoría: {{this.category}}</p>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="alert alert-warning text-center">
+      ⚠️ No hay productos disponibles en este momento.
+    </div>
+  {{/if}}
+>>>>>>> b04d4fa (entrega)
 </div>

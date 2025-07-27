@@ -1,62 +1,30 @@
 import express from "express";
 import productsRouter from "./routes/products.router.js";
-import cartRouter from "./routes/cart.router.js";
-import { engine } from "express-handlebars";  
-import { Server } from "socket.io";
+import connectMongoDB from "./config/db.js";
+import dotenv from "dotenv";
+import cartRouter from "./routes/carts.router.js";
+import { engine } from "express-handlebars";
 import viewsRouter from "./routes/views.router.js";
-import ProductManager from "./ProductManager.js";
-import http from "http";
 
-
+//inicializamos las variables de entorno
+dotenv.config();
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server); 
+app.use(express.json());
+const PORT = process.env.PORT || 8080;
 
-
-// Configuración del motor de plantillas Handlebars
-
+//handlebars
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
-//puerto servidor
-const PORT = 8080;
-// habilitamos json
-app.use(express.json());
-// habilitamos carpeta public
-app.use(express.static("public"));
+connectMongoDB();
 
 //endpoints
-
 app.use("/api/products", productsRouter);
-app.use("/api/cart", cartRouter);
+app.use("/api/carts", cartRouter);
 app.use("/", viewsRouter);
 
-// Configuración del Socket.IO
-const productManager = new  ProductManager("./src/data/products.json");
-
-io.on("connection", (socket)=> {
-  console.log("Nuevo cliente conectado");
-  
-  socket.on("newProduct", async(productData) => {
-     
-    try {
-      // Agregamos el nuevo producto usando el ProductManager
-     const newProduct = await productManager.addProduct(productData);
-     
-      
-      io.emit("updatedProducts", newProduct);
-    } catch (error) {
-      console.error("Error al agregar el producto:");      
-      
-  }
-  });
+app.listen(PORT, () => {
+  console.log("Servidor iniciado correctamente!");
 });
-
-// Iniciamos el servidor
-server.listen(PORT, () => console.log(`Servidor iniciado: http:/localhost:${PORT}`));
-
-
-
-

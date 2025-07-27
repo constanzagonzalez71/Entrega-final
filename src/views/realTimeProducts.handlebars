@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -51,3 +52,55 @@
 <!-- Scripts -->
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>
+=======
+<div class="container my-4">
+  <h2 class="text-center mb-3">📡 Productos en Tiempo Real</h2>
+
+  <!-- ✅ Alerta Bootstrap -->
+  <div id="liveAlert" class="alert alert-success fade show" role="alert" style="display: none;">
+    ¡Productos actualizados en tiempo real!
+  </div>
+
+  <!-- ✅ Contenedor de productos -->
+  <div id="productList" class="row justify-content-center mt-3">
+    {{#each products}}
+      <div class="card col-md-3 m-2 shadow-sm p-3 border-top border-primary fadeIn">
+        <h5>{{this.title}}</h5>
+        <p><i class="bi bi-currency-dollar"></i> {{this.price}}</p>
+        <p><i class="bi bi-box"></i> Stock: {{this.stock}}</p>
+        <p><i class="bi bi-tags"></i> Categoría: {{this.category}}</p>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<!-- ✅ Scripts -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  socket.on("updateProducts", (products) => {
+    const container = document.getElementById("productList");
+    container.innerHTML = "";
+
+    products.forEach(prod => {
+      const card = document.createElement("div");
+      card.className = "card col-md-3 m-2 shadow-sm p-3 border-top border-success fadeIn";
+      card.innerHTML = `
+        <h5>${prod.title}</h5>
+        <p><i class="bi bi-currency-dollar"></i> ${prod.price}</p>
+        <p><i class="bi bi-box"></i> Stock: ${prod.stock}</p>
+        <p><i class="bi bi-tags"></i> Categoría: ${prod.category}</p>
+      `;
+      container.appendChild(card);
+    });
+
+    const alert = document.getElementById("liveAlert");
+    alert.style.display = "block";
+    setTimeout(() => alert.style.display = "none", 3000);
+  });
+</script>
+
+
+
+>>>>>>> b04d4fa (entrega)
