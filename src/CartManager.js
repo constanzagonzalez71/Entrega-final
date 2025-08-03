@@ -1,6 +1,6 @@
 
 
-  import CartModel from "../models/Cart.model.js";
+  import CartModel from "../models/cart.model.js";
 
   export default class CartManager {
     async createCart() {

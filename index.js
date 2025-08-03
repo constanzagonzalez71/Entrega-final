@@ -5,7 +5,7 @@ import app from "./app.js";
 import socketHandler from "./socketHandler.js";
 import dotenv from "dotenv";
 
-// Cargar variables de entorno
+// Carga variables de entorno
 dotenv.config();
 const PORT = process.env.PORT || 8080;
 const MONGO_URI =

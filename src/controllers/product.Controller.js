@@ -1,6 +1,6 @@
-import Product from "./models/Product.js";
+import Product from "../models/product.model.js";
 
-// 📦 Obtener todos los productos con filtros, ordenamiento y paginación
+// Obtener todos los productos con filtros, ordenamiento y paginación
 export const getAllProducts = async (req, res) => {
   try {
     const rawLimit = parseInt(req.query.limit);
@@ -9,7 +9,7 @@ export const getAllProducts = async (req, res) => {
     const page = isNaN(rawPage) ? 1 : rawPage;
     const { sort, query } = req.query;
 
-    // 🔍 Filtro por categoría, estado o búsqueda por título
+    //  Filtro por categoría, estado o búsqueda por título
     let filter = {};
     if (query) {
       if (["visible", "oculto", "agotado"].includes(query)) {

@@ -7,7 +7,7 @@
         "quantity": 3
       },
       {
-        "product": { "$oid": "64e2f153dfb40be9e21a0004" },
+        "product": { "$oid": "64e2f152dfb40be9e21a0004" },
         "quantity": 1
       }
     ]

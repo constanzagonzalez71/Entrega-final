@@ -10,7 +10,7 @@ import {
 
 const router = Router();
 
-// 🛡️ Validación de ObjectId
+//  Validación de ObjectId
 const validateObjectId = (paramName) => (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params[paramName])) {
     return res.status(400).json({ error: `ID de ${paramName} inválido` });
@@ -70,7 +70,7 @@ const optionalValidation = [
   body("tags").optional().isArray().withMessage("Tags debe ser un array"),
 ];
 
-// 🔍 Manejo de errores de validación
+//  Manejo de errores de validación
 const handleValidationError = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

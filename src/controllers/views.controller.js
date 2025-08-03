@@ -1,4 +1,4 @@
-import ProductModel from "../models/product.js";
+import ProductModel from "../models/product.model.js";
 
 // Renderiza la vista 'home' con los productos desde MongoDB
 export const renderHomeView = async (req, res) => {
